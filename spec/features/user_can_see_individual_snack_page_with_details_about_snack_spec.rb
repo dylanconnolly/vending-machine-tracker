@@ -25,13 +25,13 @@ RSpec.describe "snack show page" do
     visit snack_path(kitkat)
 
     expect(page).to have_content("Price: $#{kitkat.price}")
-    expect(page).to have_content("Don's Mixed Drinks (#{dons.snacks.count} kinds of snacks, average price of $#{dons.average_snack_price.round(2)})")
-    expect(page).to have_content("Las Vegas Strip (#{vegas.snacks.count} kinds of snacks, average price of $#{vegas.average_snack_price.round(2)})")
+    expect(page).to have_content("Don's Mixed Drinks (#{dons.snacks.count} kinds of snacks, average price of #{dons.average_snack_price.round(2)})")
+    expect(page).to have_content("Las Vegas Strip (#{vegas.snacks.count} kinds of snacks, average price of #{vegas.average_snack_price.round(2)})")
 
     raisins = backyard.snacks.create(name: "Raisins", price: 0)
 
     visit snack_path(raisins)
 
-    expect(page).to have_content("Backyard (1 kind of snack, average price of $0.0)")
+    expect(page).to have_content("Backyard (1 kind of snack, average price of $0.00)")
   end
 end

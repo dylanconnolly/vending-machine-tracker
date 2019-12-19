@@ -1,8 +1,8 @@
 <h1><%= @snack.name %></h1>
-<p>Price: $<%= @snack.price %></p>
+<p>Price: <%= number_to_currency(@snack.price) %></p>
 <p>Locations:</p>
 <ul>
   <% @snack.machines.each do |machine| %>
-    <li><%= machine.location %> (<%= pluralize(machine.snacks.count, 'kind') %> of <%= 'snack'.pluralize(machine.snacks.count) %>, average price of $<%= machine.average_snack_price.round(2) %>)</li>
+    <li><%= machine.location %> (<%= pluralize(machine.snacks.count, 'kind') %> of <%= 'snack'.pluralize(machine.snacks.count) %>, average price of <%= number_to_currency(machine.average_snack_price) %>)</li>
   <% end %>
 </ul>
