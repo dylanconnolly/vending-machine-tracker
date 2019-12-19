@@ -6,6 +6,8 @@ RSpec.describe "snack show page" do
     dons = owner.machines.create(location: "Don's Mixed Drinks")
     bobs = owner.machines.create(location: "Bob's Corner")
     vegas = owner.machines.create(location: "Las Vegas Strip")
+    backyard = owner.machines.create(location: "Backyard")
+
 
     kitkat = dons.snacks.create(name: "KitKat", price: 2.50)
     snickers = dons.snacks.create(name: "Snickers", price: 3)
@@ -23,7 +25,13 @@ RSpec.describe "snack show page" do
     visit snack_path(kitkat)
 
     expect(page).to have_content("Price: $#{kitkat.price}")
-    expect(page).to have_content("Don's Mixed Drinks (#{dons.snacks.count} kinds of snacks, average price of $#{dons.average_snack_price})")
-    expect(page).to have_content("Las Vegas Strip (#{vegas.snacks.count} kinds of snacks, average price of $#{vegas.average_snack_price})")
+    expect(page).to have_content("Don's Mixed Drinks (#{dons.snacks.count} kinds of snacks, average price of $#{dons.average_snack_price.round(2)})")
+    expect(page).to have_content("Las Vegas Strip (#{vegas.snacks.count} kinds of snacks, average price of $#{vegas.average_snack_price.round(2)})")
+
+    raisins = backyard.snacks.create(name: "Raisins", price: 0)
+
+    visit snack_path(raisins)
+
+    expect(page).to have_content("Backyard (1 kind of snack, average price of $0.0)")
   end
 end

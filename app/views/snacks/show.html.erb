@@ -3,6 +3,6 @@
 <p>Locations:</p>
 <ul>
   <% @snack.machines.each do |machine| %>
-    <li><%= machine.location %> (<%= machine.snacks.count %> kinds of snacks, average price of $<%= machine.average_snack_price.round(2) %>)</li>
+    <li><%= machine.location %> (<%= pluralize(machine.snacks.count, 'kind') %> of <%= 'snack'.pluralize(machine.snacks.count) %>, average price of $<%= machine.average_snack_price.round(2) %>)</li>
   <% end %>
 </ul>
